@@ -15,7 +15,8 @@
  */
 
 function coinFlip() {
-
+  if (Math.random() < 0.5) return 'heads';
+  else return 'tails';
 }
 
 /** Multiple coin flips
@@ -38,7 +39,7 @@ function coinFlip() {
  */
 
 function coinFlips(flips) {
-
+  return Array(flips).fill(0).map((_, i) => coinFlip());
 }
 
 /** Count multiple flips
@@ -47,7 +48,7 @@ function coinFlips(flips) {
  * (e.g. the results of your `coinFlips()` function) and counts each, returning 
  * an object containing the number of each.
  * 
- * example: conutFlips(['heads', 'heads','heads', 'tails','heads', 'tails','tails', 'heads','tails', 'heads'])
+ * example: countFlips(['heads', 'heads','heads', 'tails','heads', 'tails','tails', 'heads','tails', 'heads'])
  * { tails: 5, heads: 5 }
  * 
  * @param {string[]} array 
@@ -55,7 +56,16 @@ function coinFlips(flips) {
  */
 
 function countFlips(array) {
-
+  let result = {
+    tails: 0,
+    heads: 0
+  };
+  return array.reduce((res, currentValue) => {
+    if (currentValue === 'heads') res.heads += 1;
+    else if (currentValue === 'tails') res.tails += 1;
+    else throw 'Wrong type of array elements!';
+    return res;
+  }, result);
 }
 
 /** Flip a coin!
@@ -70,7 +80,12 @@ function countFlips(array) {
  */
 
 function flipACoin(call) {
-
+  const flip = coinFlip();
+  return {
+    call,
+    flip,
+    result: call === flip ? 'win' : 'lose'
+  };
 }
 
 
@@ -78,3 +93,4 @@ function flipACoin(call) {
  * 
  * Export all of your named functions
 */
+export { coinFlip, coinFlips, countFlips, flipACoin };
