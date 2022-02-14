@@ -7,4 +7,8 @@ const flip = parseInt(args['number']) || 1;
 
 const result = coinFlips(flip);
 console.log(result);
-console.log(countFlips(result));
+if (flip === 1) {
+  console.log({ result: 1 })
+} else {
+  console.log(countFlips(result));
+}
